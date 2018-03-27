@@ -65,3 +65,4 @@ typings/
 /data/images/*
 !data/images/.gitkeep
 .vscode
+package-lock.json
