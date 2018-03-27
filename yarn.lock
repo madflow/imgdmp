@@ -2777,6 +2777,10 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
+node-cron@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/node-cron/-/node-cron-1.2.1.tgz#8c90bc5dc723a56289b0786655ab4a1c4cb60368"
+
 node-int64@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/node-int64/-/node-int64-0.4.0.tgz#87a9065cdb355d3182d8f94ce11188b825c68a3b"

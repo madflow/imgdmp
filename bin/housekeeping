@@ -1,48 +1,24 @@
 #!/usr/bin/env node
 
-const Nedb = require('nedb');
-const path = require('path');
-const fs = require('fs');
-
 /**
  * Read environment variables from .env
  */
 require('dotenv').config();
+
+const path = require('path');
+const Nedb = require('nedb');
+const housekeeper = require('../housekeeper');
+var cron = require('node-cron');
 
 const DATA_PATH = process.env.DATA_PATH || path.join(__dirname, '../data');
 
 const DB_NAME = 'images.db';
 const db = new Nedb({
   filename: `${DATA_PATH}/${DB_NAME}`,
-  autoload: true
+  autoload: false
 });
 
-(async () => {
-  db.find(
-    {
-      $where: function() {
-        return this.expires !== null && this.expires < new Date();
-      }
-    },
-    function(err, docs) {
-      if (err) {
-        throw err;
-      }
-      docs.forEach(image => {
-        fs.unlink(image.path, function(err) {
-          if (err) {
-            console.log(err);
-          } else {
-            console.log(`DELETED FILE ${image.filename}`);
-          }
-          db.remove({ _id: image._id }, {}, function(err, numRemoved) {
-            if (err) {
-              console.log(err);
-            }
-            console.log(`DELETED DB ENTRY`);
-          });
-        });
-      });
-    }
-  );
-})();
+cron.schedule('* * * * *', function() {
+  db.loadDatabase();
+  return housekeeper.deleteExpired(db);
+});
