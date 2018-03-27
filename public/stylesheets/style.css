@@ -1,0 +1,67 @@
+body {
+  font: 1rem "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+code {
+  color: #e83e8c;
+  word-break: break-word;
+}
+
+.flexcontainer {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: left;
+  align-items: left;
+  -webkit-justify-content: left;
+  justify-content: left;
+  -webkit-flex-flow: column wrap;
+  flex-flow: column wrap;
+  -webkit-align-content: stretch;
+  align-content: stretch;
+}
+     
+
+.border {
+  border: 1px solid #eee;
+}
+
+.p-3 {
+  padding: 1rem !important;
+}
+
+.p-2 {
+  padding: 0.5rem !important;
+}
+
+.p-1 {
+  padding: 0.25rem !important;
+}
+
+.p-0 {
+  padding: 0 !important;
+}
+
+.m-3 {
+  margin: 1rem !important;
+}
+
+.m-2 {
+  margin: 0.5rem !important;
+}
+
+.m-1 {
+  margin: 0.25rem !important;
+}
+
+.m-0 {
+  margin: 0 !important;
+}
+
+

@@ -1,0 +1,35 @@
+<h1 class="m-1 p-3">{{title}}</h1>
+
+<div class="flexcontainer">
+
+<h2 class="m-1 p-3">Curl</h2>
+
+<code class="border m-1 p-3">
+    curl -i -X POST -H "Authorization: Bearer mybearer" -F "image=@myimage.png" {{fullUrl}}upload
+</code>
+
+<h2 class="m-1 p-3">HTTPie</h2>
+
+<code class="border m-1 p-3">
+    http -f {{fullUrl}}upload Authorization:"Bearer mybearer" image@myimage.png
+</code>
+
+<h2 class="m-1 p-3">Guzzle (PHP)</h2>
+
+<code class="border m-1 p-3">
+    <pre>  
+    $client = new \GuzzleHttp\Client();                                                                                  
+    $fileHandle = fopen('myimage.png', 'r');                                                                                               
+    $response = $client->request('POST', '{{fullUrl}}upload', [                                                                    
+        'multipart' => [                                                                                                                      
+            [                                                                                                                                 
+                'name'     => 'image',                                                                                                        
+                'contents' => $fileHandle,                                                                                                    
+            ]                                                                                                                                 
+        ],                                                                                                                                    
+        'headers' => ['Authorization' => 'Bearer mybearer')]                                                            
+    ]);
+    </pre>  
+</code>
+
+</div>
