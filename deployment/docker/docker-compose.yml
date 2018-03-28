@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  imgdmp: 
+    image: madflow/imgdmp
+    ports: 
+      - 80:3000
+    environment:
+      - NODE_ENV=production
+      - BEARER_TOKEN=${BEARER_TOKEN}
+    volumes:
+      - imgdmp-data:/app/data
+
+volumes:
+  imgdmp-data:
+    driver: local

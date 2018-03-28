@@ -25,6 +25,34 @@ yarn start
 
 ## Docker
 
+In order to upload in image the environment variable ```BEARER_TOKEN=``` has to be set. It is your responsibility to provide this variable.
+
+* Docker Compose has the concept of ```.env``` variables to accomplish this. There is a ```env.dist``` in the root of this repository that can simply be copied to ```.env```.
+* The Docker cli accepts environment variables like this: ```-e "BEARER_TOKEN=XXXXX"```. Since this would print the secret this method is discouraged.
+
+**Example docker-compose.yml**
+
+```YAML
+version: "3"
+
+services:
+  imgdmp: 
+    image: madflow/imgdmp
+    ports: 
+      - 80:3000
+    environment:
+      - NODE_ENV=production
+      - BEARER_TOKEN=${BEARER_TOKEN}
+    volumes:
+      - imgdmp-data:/app/data
+
+volumes:
+  imgdmp-data:
+    driver: local
+```
+
+
+**Example Docker run**
 ```BASH
 docker run -v "imgdmp-data:/app/data" -e "NODE_ENV=production" -m "300M" --memory-swap "1G" -p "3000:3000" madflow/imgdmp
 ```

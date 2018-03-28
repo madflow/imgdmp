@@ -1,8 +1,13 @@
 FROM node:8-alpine
 
-RUN apk add --no-cache tini
+ENV SUPERVISOR_VERSION=3.3.4
+
+RUN apk update && apk add -u python py-pip
+RUN pip install supervisor==$SUPERVISOR_VERSION
 
 WORKDIR /app
+
+COPY deployment/docker/supervisord.conf /etc/supervisord.conf
 
 COPY package.json .
 COPY yarn.lock .
@@ -13,4 +18,4 @@ COPY . .
 
 EXPOSE 3000
 
-ENTRYPOINT ["/sbin/tini", "--", "yarn", "start"]
+ENTRYPOINT ["supervisord", "--nodaemon", "--configuration", "/etc/supervisord.conf"]
