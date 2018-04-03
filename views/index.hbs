@@ -18,16 +18,21 @@
 
 <code class="border m-1 p-3">
     <pre>  
+    // Image expires in 14 days from now
     $client = new \GuzzleHttp\Client();                                                                                  
     $fileHandle = fopen('myimage.png', 'r');                                                                                               
     $response = $client->request('POST', '{{fullUrl}}upload', [                                                                    
         'multipart' => [                                                                                                                      
             [                                                                                                                                 
                 'name'     => 'image',                                                                                                        
-                'contents' => $fileHandle,                                                                                                    
-            ]                                                                                                                                 
+                'contents' => $fileHandle,                                                                                    
+            ],
+            [
+                'name'     => 'expires',
+                'contents' => date('Y-m-d', strtotime("+14 days"))
+            ]                                                                                                                               
         ],                                                                                                                                    
-        'headers' => ['Authorization' => 'Bearer mybearer')]                                                            
+        'headers' => ['Authorization' => 'Bearer mybearer']                                                            
     ]);
     </pre>  
 </code>
