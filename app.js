@@ -65,32 +65,27 @@ passport.use(
 );
 
 app.use('/', index);
-app.post(
-  '/upload',
-  passport.authenticate('bearer', { session: false }),
-  upload.single('image'),
-  async (req, res) => {
-    try {
-      req.file.expires = new Date(req.body.expires) || null;
-      db.insert(req.file, (err, newDoc) => {
-        if (err) {
-          throw err;
-        }
+app.post('/upload', passport.authenticate('bearer', { session: false }), upload.single('image'), async (req, res) => {
+  try {
+    req.file.expires = new Date(req.body.expires) || null;
+    db.insert(req.file, (err, newDoc) => {
+      if (err) {
+        throw err;
+      }
 
-        res.status(201).json({
-          id: newDoc._id,
-          fileName: newDoc.filename,
-          originalName: newDoc.originalname,
-          mimetype: newDoc.mimetype,
-          expires: newDoc.expires,
-          self: `/images/${newDoc.filename}`
-        });
+      res.status(201).json({
+        id: newDoc._id,
+        fileName: newDoc.filename,
+        originalName: newDoc.originalname,
+        mimetype: newDoc.mimetype,
+        expires: newDoc.expires,
+        self: `/images/${newDoc.filename}`
       });
-    } catch (err) {
-      res.sendStatus(400);
-    }
+    });
+  } catch (err) {
+    res.sendStatus(400);
   }
-);
+});
 
 app.use('/images', express.static(UPLOAD_PATH));
 
@@ -109,7 +104,12 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+
+  if (req.path.indexOf('/images') === 0) {
+    res.sendFile(path.join(__dirname, '/public/assets/404.png'));
+  } else {
+    res.render('error');
+  }
 });
 
 module.exports = app;
