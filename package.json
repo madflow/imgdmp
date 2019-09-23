@@ -37,9 +37,9 @@
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.0.1",
-    "jest": "^22.4.3",
+    "jest": "^24.9.0",
     "rimraf": "^2.6.2",
-    "superagent": "^3.8.2",
-    "supertest": "^3.0.0"
+    "superagent": "^5.1.0",
+    "supertest": "^4.0.2"
   }
 }
