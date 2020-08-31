@@ -4,7 +4,7 @@ const TEST_DATA_PATH = path.join(__dirname, 'testdata');
 process.env.DATA_PATH = TEST_DATA_PATH;
 const request = require('supertest');
 const rimraf = require('rimraf');
-const app = require('../app');
+const app = require('../src/app');
 
 describe('Upload page', () => {
   afterEach(async () => {
@@ -43,7 +43,7 @@ describe('Upload page', () => {
       .set('Authorization', `Bearer ${bearerToken}`);
     expect(response.statusCode).toBe(201);
     expect(response.header['content-type']).toBe(
-      'application/json; charset=utf-8'
+      'application/json; charset=utf-8',
     );
     expect(response.body.originalName).toBe('poo.png');
     expect(response.body.mimetype).toBe('image/png');

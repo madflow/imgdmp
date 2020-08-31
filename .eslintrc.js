@@ -1,12 +1,15 @@
 module.exports = {
-    "extends": "standard",
-    "rules": {
-        "semi": 0,
-        "space-before-function-paren": 0
-    },
-    "env": {
-        node: true,
-        jest: true,
-        jasmine: true
-    }
+  parserOptions: {
+    ecmaVersion: 2017,
+  },
+  extends: ['prettier'],
+  plugins: ['prettier'],
+  rules: {
+    'prettier/prettier': ['error'],
+  },
+  env: {
+    es6: true,
+    node: true,
+    jest: true,
+  },
 };

@@ -26,7 +26,7 @@ function deleteExpired(db) {
           });
         });
       });
-    }
+    },
   );
 }
 

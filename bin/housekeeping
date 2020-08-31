@@ -7,18 +7,18 @@ require('dotenv').config();
 
 const path = require('path');
 const Nedb = require('nedb');
-const housekeeper = require('../housekeeper');
-var cron = require('node-cron');
+const housekeeper = require('../src/housekeeper');
+const cron = require('node-cron');
 
 const DATA_PATH = process.env.DATA_PATH || path.join(__dirname, '../data');
 
 const DB_NAME = 'images.db';
 const db = new Nedb({
-  filename: `${DATA_PATH}/${DB_NAME}`,
-  autoload: false
+  filename: path.join(DATA_PATH, DB_NAME),
+  autoload: false,
 });
 
-cron.schedule('* * * * *', function() {
+cron.schedule('* * * * *', function () {
   db.loadDatabase();
   return housekeeper.deleteExpired(db);
 });
