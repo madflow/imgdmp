@@ -3,22 +3,22 @@ const fs = require('fs');
 function deleteExpired(db) {
   db.find(
     {
-      $where: function() {
+      $where: function () {
         return this.expires !== null && this.expires < new Date();
-      }
+      },
     },
-    function(err, docs) {
+    function (err, docs) {
       if (err) {
         throw err;
       }
-      docs.forEach(image => {
-        fs.unlink(image.path, function(err) {
+      docs.forEach((image) => {
+        fs.unlink(image.path, function (err) {
           if (err) {
             console.log(err);
           } else {
             console.log(`DELETED FILE ${image.filename}`);
           }
-          db.remove({ _id: image._id }, {}, function(err, numRemoved) {
+          db.remove({ _id: image._id }, {}, function (err, numRemoved) {
             if (err) {
               console.log(err);
             }
@@ -31,5 +31,5 @@ function deleteExpired(db) {
 }
 
 module.exports = {
-  deleteExpired: deleteExpired
+  deleteExpired: deleteExpired,
 };
