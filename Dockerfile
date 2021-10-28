@@ -1,4 +1,4 @@
-FROM node:12-alpine
+FROM node:14-alpine
 
 ENV SUPERVISOR_VERSION=3.3.4
 
