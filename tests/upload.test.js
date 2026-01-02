@@ -3,16 +3,16 @@ const moment = require('moment');
 const TEST_DATA_PATH = path.join(__dirname, 'testdata');
 process.env.DATA_PATH = TEST_DATA_PATH;
 const request = require('supertest');
-const rimraf = require('rimraf');
+const { rimraf } = require('rimraf');
 const app = require('../src/app');
 
 describe('Upload page', () => {
   afterEach(async () => {
-    await rimraf(TEST_DATA_PATH + '/images/*', () => {});
+    await rimraf(TEST_DATA_PATH + '/images/*');
   });
 
   afterAll(async () => {
-    await rimraf(TEST_DATA_PATH + '/*.db', () => {});
+    await rimraf(TEST_DATA_PATH + '/*.db');
   });
 
   test('returns 404 with a POST request', async () => {
