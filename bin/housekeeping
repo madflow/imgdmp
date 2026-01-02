@@ -6,7 +6,7 @@
 require('dotenv').config();
 
 const path = require('path');
-const Nedb = require('nedb');
+const Nedb = require('@seald-io/nedb');
 const housekeeper = require('../src/housekeeper');
 const cron = require('node-cron');
 
