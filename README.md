@@ -1,5 +1,3 @@
-[![pipeline status](https://gitlab.com/madflow/imgdmp/badges/master/pipeline.svg)](https://gitlab.com/madflow/imgdmp/commits/master)
-
 # imgdmp (pron: ĭmˈĭjdŭmp)
 
 > A service for uploading and storing images
